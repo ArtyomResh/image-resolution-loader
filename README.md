@@ -1,5 +1,6 @@
-<!-- [![npm][npm]][npm-url]
-[![node][node]][node-url] -->
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps][deps-url]]
 
 # image-resolution-loader
 
@@ -139,40 +140,40 @@ The result will be a variable `images`, containing the following information:
 
 ```js
 {
-  1x: '/file@1x.png',
-  2x: '/file@2x.png',
-  3x: '/file@3x.png',
+  '1x': '/file@1x.png',
+  '2x': '/file@2x.png',
+  '3x': '/file@3x.png',
   images: [{
     path: '/file@1x.png',
-    width: *width of 1x image*,
-    height: *height of 1x image*,
+    width: /* width of 1x image */,
+    height: /* height of 1x image */,
     resolution: '1x',
   }, {
     path: '/file@2x.png',
-    width: *width of 2x image*,
-    height: *height of 2x image*,
+    width: /* width of 2x image */,
+    height: /* height of 2x image */,
     resolution: '2x',
   }, {
     path: '/file@1x.png',
-    width: *width of 3x image*,
-    height: *height of 3x image*,
+    width: /* width of 3x image */,
+    height: /* height of 3x image */,
     resolution: '3x',
   }],
   imagesByResolution: {
-    1x: {
+    '1x': {
       path: '/file@1x.png',
-      width: *width of 1x image*,
-      height: *height of 1x image*,
+      width: /* width of 1x image */,
+      height: /* height of 1x image */,
     },
-    2x: {
+    '2x': {
       path: '/file@2x.png',
-      width: *width of 2x image*,
-      height: *height of 2x image*,
+      width: /* width of 2x image */,
+      height: /* height of 2x image */,
     },
-    3x: {
+    '3x': {
       path: '/file@3x.png',
-      width: *width of 3x image*,
-      height: *height of 3x image*,
+      width: /* width of 3x image */,
+      height: /* height of 3x image */,
     },
     srcSet: '/file@1x.png 1x,/file@2x.png 2x,/file@3x.png 3x',
   },
@@ -181,3 +182,10 @@ The result will be a variable `images`, containing the following information:
 ## License
 
 [MIT](./LICENSE)
+
+[npm]: https://img.shields.io/npm/v/image-resolution-loader.svg
+[npm-url]: https://npmjs.com/package/image-resolution-loader
+[node]: https://img.shields.io/node/v/image-resolution-loader
+[node-url]: https://nodejs.org
+[deps]: https://david-dm.org/ArtyomResh/image-resolution-loader.svg
+[deps-url]: https://david-dm.org/ArtyomResh/image-resolution-loader
