@@ -1,6 +1,6 @@
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
-[![deps][deps][deps-url]]
+[![deps][deps]][deps-url]
 
 # image-resolution-loader
 
