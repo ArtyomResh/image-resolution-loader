@@ -1,6 +1,6 @@
 {
   "name": "image-resolution-loader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A loader that takes your image and returns @1x, @2x and @3x resolution versions of it",
   "main": "lib/index.js",
   "engines": {
