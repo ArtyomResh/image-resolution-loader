@@ -1,0 +1,38 @@
+{
+  "name": "image-resolution-loader",
+  "version": "1.0.0",
+  "description": "A loader that takes your image and returns @1x, @2x and @3x resolution versions of it",
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">= 11.10.1"
+  },
+  "scripts": {
+    "build": "babel src -d lib",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . -c .eslintrc.js --ext js,jsx"
+  },
+  "keywords": [
+    "webpack",
+    "webpack-loader"
+  ],
+  "author": "Artyom Resh @reshnaut",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtyomResh/image-resolution-loader.git"
+  },
+  "dependencies": {
+    "loader-utils": "^1.2.3",
+    "sharp": "^0.23.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@csssr/eslint-config-core": "^1.0.2",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.5.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.18.2"
+  }
+}
