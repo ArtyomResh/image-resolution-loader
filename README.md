@@ -4,8 +4,7 @@
 
 # image-resolution-loader
 
-The `file-loader` resolves `import`/`require()` on a file into a url and emits the file into the output directory.
-The `image-resolution-loader` takes your image and returns @1x, @2x and @3x resolution versions of it
+The `image-resolution-loader` takes your image and returns @1x, @2x and @3x resolution versions of it.
 
 ## Install
 
