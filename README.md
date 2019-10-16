@@ -61,7 +61,9 @@ const images = require('./file.png')
 ```
 
 And run `webpack` via your preferred method.
-The Loader will accept your image as the initial with 3x resolution (it is recommended to set the height and width of the image multiple of 3) and will generate from it 2x and 1x versions. Next, it will emit these images on the specified path and return the object, which will contain the path to the all versions of the image and srcSet.
+The Loader will accept your image as the initial with 3x resolution and will generate from it 2x and 1x versions. Next, it will emit these images on the specified path and return the object, which will contain the path to the all versions of the image and srcSet.
+
+> ℹ️ It is recommended to set the height and width of the initial image multiple of 3
 
 ## Options
 
