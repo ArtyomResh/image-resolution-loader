@@ -2,6 +2,8 @@ const loaderUtils = require('loader-utils')
 const sharp = require('sharp')
 const getOutputAndPublicPaths = require('./getOutputAndPublicPaths')
 const getLoaderResults = require('./getLoaderResults')
+const imageminPngquant = require('imagemin-pngquant')
+const imageminZopfli = require('imagemin-zopfli')
 
 const MIMES = {
   jpg: 'image/jpeg',
@@ -64,17 +66,17 @@ module.exports = function loader(content) {
         return files
       }
 
+      const width1x = width / 3
+      const height1x = height / 3
+
+      if (!Number.isInteger(width1x) || !Number.isInteger(height1x)) {
+        console.warn(
+          `Width (${width}) or height (${height}) of the image ${this.resourcePath} is not divided by 3, additional compression losses are possible`,
+        )
+      }
+
       let promises = []
       resolutions.forEach(resolution => {
-        const width1x = width / 3
-        const height1x = height / 3
-
-        if (!Number.isInteger(width1x) || !Number.isInteger(height1x)) {
-          console.warn(
-            `Width (${width}) or height (${height}) of the image ${this.resourcePath} is not divided by 3, additional compression losses are possible`,
-          )
-        }
-
         const width1xNormalized = Math.floor(width / 3)
         const height1xNormalized = Math.floor(height / 3)
         const newWidth = width1xNormalized * parseInt(resolution)
@@ -82,31 +84,64 @@ module.exports = function loader(content) {
 
         promises.push(
           new Promise((resolve, reject) => {
-            image
-              .clone()
-              .resize({
-                width: newWidth,
-                height: newHeight,
-              })
-              .toBuffer((err, data, info) => {
+            const resizedImage = image.clone().resize({
+              width: newWidth,
+              height: newHeight,
+            })
+
+            const toBufferCallback = (err, data, info) => {
+              if (err) {
+                reject(err)
+              } else {
+                const publicPath = createFile({
+                  data,
+                  resolution,
+                  ext: info.format,
+                })
+
+                resolve({
+                  data,
+                  path: publicPath,
+                  width: newWidth,
+                  height: newHeight,
+                  resolution,
+                })
+              }
+            }
+
+            if (ext === 'webp') {
+              return resizedImage.webp(config.webp).toBuffer(toBufferCallback)
+            }
+
+            if (ext === 'png') {
+              return resizedImage.toBuffer((err, data, info) => {
                 if (err) {
                   reject(err)
                 } else {
-                  const publicPath = createFile({
-                    data,
-                    resolution,
-                    ext: info.format,
-                  })
+                  imageminPngquant(config.png)(data)
+                    .then(imageminZopfli(config.zopfli))
+                    .then(image => {
+                      const publicPath = createFile({
+                        data: image,
+                        resolution,
+                        ext: info.format,
+                      })
 
-                  resolve({
-                    data,
-                    path: publicPath,
-                    width: newWidth,
-                    height: newHeight,
-                    resolution,
-                  })
+                      resolve({
+                        data: image,
+                        path: publicPath,
+                        width: newWidth,
+                        height: newHeight,
+                        resolution,
+                      })
+                    })
                 }
               })
+            }
+
+            if (ext === 'jpg' || ext === 'jpeg') {
+              return resizedImage.jpeg(config.jpeg).toBuffer(toBufferCallback)
+            }
           }),
         )
       })

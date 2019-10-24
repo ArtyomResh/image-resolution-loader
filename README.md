@@ -92,6 +92,34 @@ Default: [`__webpack_public_path__`](https://webpack.js.org/api/module-variables
 
 Specifies a custom public path for the target file(s).
 
+### `webp`
+
+Type: object
+Default: {}
+
+[sharp](https://github.com/lovell/sharp/) is used for optimizing webp images.The default options of [`sharp.webp()`](https://sharp.pixelplumbing.com/en/stable/api-output/#webp) are used if you omit this option.
+
+### `jpg`
+
+Type: object
+Default: {}
+
+[sharp](https://github.com/lovell/sharp/) is used for optimizing jpg images.The default options of [`sharp.jpg()`](https://sharp.pixelplumbing.com/en/stable/api-output/#jpeg) are used if you omit this option.
+
+### `png`
+
+Type: object
+Default: {}
+
+[imagemin-pngquant](https://github.com/imagemin/imagemin-pngquant) is used for optimizing png images.The default options of [pngquant](https://github.com/kornelski/pngquant) are used if you omit this option.
+
+### `zopfli`
+
+Type: object
+Default: {}
+
+[imagemin-zopfli](https://github.com/imagemin/imagemin-zopfli) is used for compressing png images.The default options of [imagemin-zopfli](https://github.com/imagemin/imagemin-zopfli) are used if you omit this option.
+
 ### `disable`
 
 Type: `Boolean`
