@@ -16,7 +16,7 @@ module.exports = files => {
 
   const imagesByResolution = files.reduce((acc, { path, resolution, width, height }) => {
     acc[resolution.replace(/"/gi, '')] = {
-      path: path.replace(/"/gi, ''),
+      path,
       width,
       height,
     }
@@ -28,12 +28,16 @@ module.exports = files => {
   const result = `
     module.exports = {
       images: [${images}],
-      imagesByResolution: ${JSON.stringify(imagesByResolution)},
-      "1x": "${imagesByResolution['1x'].path}",
-      "2x": "${imagesByResolution['2x'].path}",
-      "3x": "${mainImage.path}",
+      imagesByResolution: {
+        "1x": ${imagesByResolution['1x'].path},
+        "2x": ${imagesByResolution['2x'].path},
+        "3x": ${mainImage.path},
+      },
+      "1x": ${imagesByResolution['1x'].path},
+      "2x": ${imagesByResolution['2x'].path},
+      "3x": ${mainImage.path},
       srcSet: ${srcSet},
-      toString: function(){return "${mainImage.path}"},
+      toString: function(){return ${mainImage.path}},
     };
   `
 
